@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # To be used with WebIOPi <https://code.google.com/p/webiopi/>
 
@@ -36,7 +36,7 @@ def reboot(t=1):
 def getData():
     temp =  round(int(open('/sys/class/thermal/thermal_zone0/temp').read()) / 1e3,1)
     perc = psutil.cpu_percent()
-    memAvail = round(psutil.avail_phymem()/1000000,1)
+    memAvail = round(psutil.virtual_memory().available/1000000,1)
     diskUsage =  psutil.disk_usage('/').percent
     j = {'cpu_temp': temp, 'cpu_perc': perc, 'mem_avail': memAvail, 'disk_usage': diskUsage}
     return json.dumps(j,indent=4, separators=(',', ': '))
